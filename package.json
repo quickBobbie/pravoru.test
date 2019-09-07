@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "build": "gulp build",
+    "start": "node index.js",
+    "start-dev": "gulp & node index.js",
+    "start-dev-nodemon": "gulp & nodemon"
   },
   "repository": {
     "type": "git",
@@ -26,7 +29,8 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-minify": "^3.1.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-stylus": "^2.7.0"
   }
 }
