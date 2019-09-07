@@ -1,0 +1,94 @@
+.content
+  width 100%
+  display flex
+  flex-direction column
+
+  .search-block
+    display flex
+    flex-direction row
+    justify-content flex-start
+    align-items center
+    height 50px
+
+    form
+      flex-grow 9
+
+      .input
+        height 30px
+        display flex
+        justify-content flex-start
+        box-shadow 0px 0px 2px #3f51b5
+        border-radius 5px
+        background #fff
+
+        input
+          flex-grow 9
+          outline none
+          border none
+          margin 0 5px
+          font normal .8em 'Open Sans'
+          font-weight 600
+          color #263238
+
+        button
+          width 30px
+          border none
+          background #fff
+          margin 1px
+          cursor pointer
+          color #263238
+
+    a
+      display block
+      line-height 30px
+      text-align center
+      height 30px
+      width 30px
+      color #3F51B5
+
+  .content-block
+    background #ffffff
+    box-shadow 0px 0px 1px #3f51b5
+    border-radius 5px
+
+    ul
+
+      .contact-list-header
+        font normal .8em 'Open Sans'
+        color #263238
+
+      li
+        height 40px
+        border-bottom solid 1px #ECEFF1
+        display flex
+        flex-direction row
+        justify-content space-between
+        align-items center
+        padding 0 10px
+
+        &:last-child
+          border none
+
+        a
+          display block
+          font normal .85em/30px 'Open Sans'
+          font-weight 400
+          color #607D8B
+          width 100%
+          margin-right 10px
+
+          span
+            margin-left 10px
+
+        .control
+          border-left solid 1px #eceff1
+
+          a
+            text-align center
+            width 30px
+            margin 0 0 0 10px
+
+@media (max-width 720px)
+  .content
+    width calc(100% - 20px)
+    padding 0 10px

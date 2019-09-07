@@ -1,0 +1,21 @@
+.content
+    .search-block
+        form(ng-submit='getContacts')
+            .input
+                input(type='text', placeholder='Search contacts' ng-model='search')
+                button(type='submit')
+                    i.fas.fa-search
+        a(href='#/contact/add' title="Add contact")
+            i.fas.fa-plus
+    .content-block
+        ul
+            li.contact-list-header
+                h2(ng-if='contacts.length') Results: {{contacts.length}}
+                h2(ng-if='!contacts.length') No contacts
+            li(ng-repeat='contact in contacts')
+                a(href='#/contact/{{contact._id}}')
+                    i.fas.fa-user
+                    span {{contact.firstName}} {{contact.lastName}}
+                .control
+                    a(href='#/contact/{{contact._id}}/update')
+                        i.fas.fa-pen

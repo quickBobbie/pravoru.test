@@ -10,9 +10,22 @@ const getData = (data) => {
     return { ...data };
 };
 
-module.exports.getAll = async (req, res) => {
+module.exports.get = async (req, res) => {
     try {
-        let contacts = await Contact.find().sort({ createAt: -1 });
+        let find = {};
+
+        if (req.query && req.query.search) {
+            let search = new RegExp(req.query.search);
+            find = {
+                $or: [
+                    { firstName: search },
+                    { lastName: search },
+                    { phone: search }
+                ]
+            }
+        }
+
+        let contacts = await Contact.find(find).sort({ createAt: -1 });
 
         if (!contacts) {
             return res.status(403).json({ message: "No contacts" });

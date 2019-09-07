@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>ПРАВО.РУ | тестовое задание</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="build/app.style.css">
+    <link rel="stylesheet" href="build/contactList/contactList.style.css">
+    <link rel="stylesheet" href="build/contactInfo/contactInfo.style.css">
+    <link rel="stylesheet" href="build/contactMutation/contactMutation.style.css">
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+    <script src="build/app.module.js"></script>
+    <script src="build/app.router.js"></script>
+    <script src="build/app.controller.js"></script>
+    <script src="build/contactList/contactList.controller.js"></script>
+    <script src="build/contactInfo/contactInfo.controller.js"></script>
+    <script src="build/contactMutation/contactMutation.controller.js"></script>
+</head>
+<body ng-controller="appController">
+    <header>
+        <h1>Phone book</h1>
+    </header>
+    <div ng-view class="container"></div>
+</body>
+</html>

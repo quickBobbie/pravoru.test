@@ -1,5 +1,6 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const stylus = require('gulp-stylus');
+const autoprefixer = require('gulp-autoprefixer');
 const pug = require('gulp-pug');
 const minify = require('gulp-minify');
 
@@ -20,6 +21,7 @@ const libTask = () => {
 const stylusTask = () => {
     return src(stylusSrc)
         .pipe(stylus({ compress: true }))
+        .pipe(autoprefixer())
         .pipe(dest(buildSrc));
 };
 
