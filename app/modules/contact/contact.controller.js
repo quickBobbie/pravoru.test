@@ -60,6 +60,12 @@ module.exports.create = async (req, res) => {
         if (!params.firstName || !params.lastName || !params.phone) {
             return res.status(403).json({ message: "No data" });
         }
+        if (params.phone.length < 10) {
+            return res.status(403).json({ message: "Phone number must be at least 10 characters" });
+        }
+        if (params.phone.length === 10) {
+            params.phone = 7 + params.phone;
+        }
 
         let contact = await Contact.findOne({ phone: params.phone });
 

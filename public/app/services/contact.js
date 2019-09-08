@@ -61,6 +61,7 @@ angular.module('app').service('contactService', [
                             let _contact = data.data;
                             _contact.createdAt = parseDate(_contact.createdAt);
                             contactList.push({ ..._contact });
+
                             return callback && callback(null, _contact, response);
                         }
                     }
@@ -120,6 +121,7 @@ angular.module('app').service('contactService', [
                             contact.createdAt = parseDate(contact.createdAt);
                             return contact;
                         });
+
                         return callback && callback(null, contactList);
                     }
                     callback && callback(null, null, response);
