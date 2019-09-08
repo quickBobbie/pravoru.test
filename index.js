@@ -9,6 +9,7 @@ const database = require('./app/app.database')(config.database);
 const app = express();
 
 app.disable('x-powered-by');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(router);

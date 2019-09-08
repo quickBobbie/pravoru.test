@@ -1,0 +1,28 @@
+.content
+    .content-block
+        ul
+            li.contact-list-header
+                h2(ng-if='isAdd') Add new contact
+                h2(ng-if='!isAdd') Update contact
+            li.contact-form
+                form(ng-submit='submit()')
+                    .input
+                        input(type='text' required ng-model='contact.firstName')
+                        label First name
+                    .input
+                        input(type='text' required ng-model='contact.lastName')
+                        label Last name
+                    .input
+                        input(ng-if='isAdd' type='text' required ng-model='contact.phone' ng-disabled='!isAdd')
+                        input.active(ng-if='!isAdd' type='text' required ng-model='contact.phone' ng-disabled='!isAdd')
+                        label(ng-if='isAdd') Phone number
+                        label.active(ng-if='!isAdd') Phone number
+                    .controls
+                        .button-control
+                            button.button(type='submit')
+                                i.fas.fa-check
+                                span {{isAdd ? "Add contact" : "Update contact"}}
+                        .button-control.margin-right-10.width-30
+                            a.button(href='#/')
+                                i.fas.fa-chevron-left
+                                span Go to list

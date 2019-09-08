@@ -1,0 +1,53 @@
+.contact-form
+  margin 10px
+
+  form
+    display: flex
+    flex-direction column
+
+  .input
+    position relative
+    top 0
+    left 0
+    width 100%
+    height 60px
+
+    input
+      position absolute
+      bottom 0
+      left 0
+      height 30px
+      width 100%
+      border none
+      border-bottom solid 1px #78909c
+      font normal .8em 'Open Sans'
+      color #26a69a
+
+      &:focus ~ label, &:valid ~ label
+        bottom 35px
+        font normal .75em 'Open Sans'
+        color: #26a69a
+
+      &:focus, &:valid
+        border-color: #26a69a
+
+    input.active
+      color #78909c
+
+    label
+      position absolute
+      bottom 0
+      left 0
+      font normal .85em/30px 'Open Sans'
+      color #78909c
+      font-weight 400
+      transition all .2s
+
+    label.active
+      bottom 35px
+      font normal .75em 'Open Sans'
+      color: #78909c
+
+  button.button
+    border none
+    background #78909c

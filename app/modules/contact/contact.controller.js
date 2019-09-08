@@ -56,6 +56,7 @@ module.exports.getById = async (req, res) => {
 module.exports.create = async (req, res) => {
     try {
         let params = getData(req.body);
+        console.log(params)
 
         if (!params.firstName || !params.lastName || !params.phone) {
             return res.status(403).json({ message: "No data" });

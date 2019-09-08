@@ -1,0 +1,27 @@
+.content
+    .content-block
+        ul.unclick-list
+            li.contact-list-body
+                span First name
+                span {{contact.firstName}}
+            li.contact-list-body
+                span Last name
+                span {{contact.lastName}}
+            li.contact-list-body
+                span Phone number
+                span +{{contact.phone}}
+            li.contact-list-body
+                span Created
+                span {{contact.createdAt}}
+    .controls
+        .button-control.col-2
+            .button.hover-red
+                i.fas.fa-trash-alt
+                span Delete
+            a.button(href='#/contact/{{contact._id}}/update')
+                i.fas.fa-pen
+                span Update
+        .button-control.margin-right-10.width-30
+            a.button(href='#/')
+                i.fas.fa-chevron-left
+                span Go to list

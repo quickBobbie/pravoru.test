@@ -12,10 +12,12 @@
             li.contact-list-header
                 h2(ng-if='contacts.length') Results: {{contacts.length}}
                 h2(ng-if='!contacts.length') No contacts
-            li(ng-repeat='contact in contacts')
+            li.contact-list-body(ng-repeat='contact in contacts')
                 a(href='#/contact/{{contact._id}}')
                     i.fas.fa-user
                     span {{contact.firstName}} {{contact.lastName}}
                 .control
-                    a(href='#/contact/{{contact._id}}/update')
+                    a(href='#/contact/{{contact._id}}/update' title='Update contact')
                         i.fas.fa-pen
+                    .button.hover-red(title='Delete contact')
+                        i.fas.fa-trash-alt

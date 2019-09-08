@@ -53,21 +53,29 @@
 
     ul
 
+      li
+        border-bottom solid 1px #ECEFF1
+
+        &:last-child
+          border-bottom none
+
       .contact-list-header
         font normal .8em 'Open Sans'
         color #263238
-
-      li
         height 40px
-        border-bottom solid 1px #ECEFF1
+        padding 0 10px
+
+        h2
+          font-weight 600
+          line-height 40px
+
+      .contact-list-body
+        height 40px
         display flex
         flex-direction row
         justify-content space-between
         align-items center
         padding 0 10px
-
-        &:last-child
-          border none
 
         a
           display block
@@ -82,11 +90,28 @@
 
         .control
           border-left solid 1px #eceff1
+          width 100px
+          display flex
+          flex-direction row
+          align-items center
+          justify-content space-between
+          color #607D8B
 
           a
             text-align center
             width 30px
             margin 0 0 0 10px
+
+          .button
+            width 30px
+            height 30px
+            text-align center
+            line-height 30px
+            cursor pointer
+            transition color 0.2s
+
+            &.hover-red:hover
+              color: #ef5350
 
 @media (max-width 720px)
   .content
