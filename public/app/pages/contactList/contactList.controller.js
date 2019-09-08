@@ -10,14 +10,12 @@ angular.module('app').controller('contactListController', [
         $scope.getContacts = () => {
             contactService.getContactList($rootScope.API_URL, $scope.search, (err, contacts, response) => {
                 if (err) {
-                    alert(err.statusText);
-                    return console.log(err);
+                    return alert(err.data.message);
                 }
                 if (contacts && contacts.length) {
                     $scope.contacts = angular.copy(contacts);
                 } else {
                     alert("Ooops! Something went wrong.");
-                    console.log(response);
                 }
             })
         };
@@ -26,7 +24,7 @@ angular.module('app').controller('contactListController', [
             if (confirm("Are you sure you want to delete the contact?")) {
                 contactService.deleteContact($rootScope.API_URL, id, (err, contacts) => {
                     if (err) {
-                        return alert("Ooops! Something went wrong.");
+                        return alert(err.data.message);
                     }
                     $scope.contacts = angular.copy(contacts);
                 })

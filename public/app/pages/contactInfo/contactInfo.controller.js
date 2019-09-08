@@ -10,6 +10,9 @@ angular.module('app').controller('contactInfoController', [
 
         const getContact = () => {
             contactService.getContact($rootScope.API_URL, $routeParams.id, (err, contact, response) => {
+                if (err) {
+                    return alert(err.data.message);
+                }
                 if (contact) {
                     $scope.contact = angular.copy(contact);
                 } else {
@@ -22,7 +25,7 @@ angular.module('app').controller('contactInfoController', [
             if (confirm("Are you sure you want to delete the contact?")) {
                 contactService.deleteContact($rootScope.API_URL, $scope.contact._id, (err, contacts) => {
                     if (err) {
-                        alert("Ooops! Something went wrong.");
+                        return alert(err.data.message);
                     }
 
                     $location.path('/');

@@ -14,6 +14,9 @@ angular.module('app').controller('contactMutationController', [
 
         const getContact = () => {
             contactService.getContact($rootScope.API_URL, $routeParams.id, (err, contact, response) => {
+                if (err) {
+                    return alert(err.data.message);
+                }
                 if (contact) {
                     for (let property in $scope.contact) {
                         $scope.contact[property] = angular.copy(contact[property]);
@@ -36,6 +39,9 @@ angular.module('app').controller('contactMutationController', [
         $scope.createContact = () => {
             validateContact();
             contactService.addContact($rootScope.API_URL, $scope.contact, (err, contact, response) => {
+                if (err) {
+                    return alert(err.data.message);
+                }
                 if (contact) {
                     $location.path(`/contact/${contact._id}`);
                 } else {
@@ -47,8 +53,11 @@ angular.module('app').controller('contactMutationController', [
         $scope.updateContact = () => {
             validateContact();
             contactService.updateContact($rootScope.API_URL, $routeParams.id, $scope.contact, (err, contact, response) => {
+                if (err) {
+                    return alert(err.data.message);
+                }
                 if (contact) {
-                    $location.path(`/contact/${$routeParams.id}`);
+                    $location.path(`/contact/${contact._id}`);
                 } else {
                     alert("Ooops! Something went wrong.");
                 }
