@@ -19,5 +19,5 @@
                 .control
                     a(href='#/contact/{{contact._id}}/update' title='Update contact')
                         i.fas.fa-pen
-                    .button.hover-red(title='Delete contact')
+                    .button.hover-red(title='Delete contact' ng-click='deleteContact(contact._id)')
                         i.fas.fa-trash-alt

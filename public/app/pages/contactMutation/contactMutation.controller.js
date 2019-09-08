@@ -1,11 +1,10 @@
 angular.module('app').controller('contactMutationController', [
     '$scope',
     '$rootScope',
-    '$http',
     '$routeParams',
     '$location',
     'contactService',
-    function($scope, $rootScope, $http, $routeParams, $location, contactService) {
+    function($scope, $rootScope, $routeParams, $location, contactService) {
         $scope.isAdd = !$routeParams.id;
         $scope.contact = {
             firstName: "",
@@ -13,69 +12,47 @@ angular.module('app').controller('contactMutationController', [
             phone: "",
         };
 
-        $scope.createContact = () => {
-            let url = [$rootScope.API_URL, 'contact', 'create'].join('/');
-
-            $http.post(url, $scope.contact)
-                .then(({ data }) => {
-                    if (data && data.data) {
-                        alert("success");
-                        return $location.path('#/')
+        const getContact = () => {
+            contactService.getContact($rootScope.API_URL, $routeParams.id, (err, contact, response) => {
+                if (contact) {
+                    for (let property in $scope.contact) {
+                        $scope.contact[property] = angular.copy(contact[property]);
                     }
+                } else {
+                    alert("Ooops! Something went wrong.");
+                }
+            });
+        };
 
-                    alert("Ooops")
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+        const validateContact = () => {
+            for (let property in $scope.contact) {
+                $scope.contact[property] = $scope.contact[property]
+                    .replace(/<[^>]+>/g,'')
+                    .replace(/\s+/gi, ' ')
+                    .trim();
+            }
+        };
+
+        $scope.createContact = () => {
+            validateContact();
+            contactService.addContact($rootScope.API_URL, $scope.contact, (err, contact, response) => {
+                if (contact) {
+                    $location.path(`/contact/${contact._id}`);
+                } else {
+                    alert("Ooops! Something went wrong.");
+                }
+            })
         };
 
         $scope.updateContact = () => {
-            let url = [$rootScope.API_URL, 'contact', 'update', $routeParams.id].join('/');
-
-            $http.put(url, $scope.contact)
-                .then(({ status }) => {
-                    if (status && status === 200) {
-                        alert("success");
-                        return $location.path('#/');
-                    }
-
-                    alert("Ooops")
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        };
-
-        const getContact = () => {
-            let contact = contactService.getContact($routeParams.id);
-
-            if (!Object.keys(contact).length) {
-                return getContactFromServer();
-            }
-
-            for (let property in $scope.contact) {
-                $scope.contact[property] = angular.copy(contact[property]);
-            }
-        };
-
-        const getContactFromServer = () => {
-            let url = [$rootScope.API_URL, 'contact', $routeParams.id].join('/');
-
-            $http.get(url)
-                .then(({data}) => {
-                    if (data && data.data) {
-                        contactService.addContact(data.data);
-                        let contact = contactService.getContact($routeParams.id);
-
-                        for (let property in $scope.contact) {
-                            $scope.contact[property] = angular.copy(contact[property]);
-                        }
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+            validateContact();
+            contactService.updateContact($rootScope.API_URL, $routeParams.id, $scope.contact, (err, contact, response) => {
+                if (contact) {
+                    $location.path(`/contact/${$routeParams.id}`);
+                } else {
+                    alert("Ooops! Something went wrong.");
+                }
+            })
         };
 
         $scope.submit = () => {

@@ -1,6 +1,8 @@
 .content
     .content-block
         ul.unclick-list
+            li.contact-list-header
+                h2 Contact info
             li.contact-list-body
                 span First name
                 span {{contact.firstName}}
@@ -15,7 +17,7 @@
                 span {{contact.createdAt}}
     .controls
         .button-control.col-2
-            .button.hover-red
+            .button.hover-red(ng-click='deleteContact()')
                 i.fas.fa-trash-alt
                 span Delete
             a.button(href='#/contact/{{contact._id}}/update')

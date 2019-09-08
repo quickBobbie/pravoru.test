@@ -3,31 +3,33 @@ angular.module('app').controller('contactInfoController', [
     '$rootScope',
     '$http',
     '$routeParams',
+    '$location',
     'contactService',
-    function($scope, $rootScope, $http, $routeParams, contactService) {
+    function($scope, $rootScope, $http, $routeParams, $location, contactService) {
         $scope.contact = {};
 
-        $scope.getContact = () => {
-            let contact = angular.copy(contactService.getContact($routeParams.id));
-
-            if (Object.keys(contact).length) {
-                return $scope.contact = contact;
-            }
-
-            let url = [$rootScope.API_URL, 'contact', $routeParams.id].join('/');
-
-             $http.get(url)
-                 .then(({data}) => {
-                     if (data && data.data) {
-                         contactService.addContact(data.data);
-                         $scope.contact = angular.copy(contactService.getContact($routeParams.id));
-                     }
-                 })
-                 .catch(err => {
-                     console.log(err);
-                 })
+        const getContact = () => {
+            contactService.getContact($rootScope.API_URL, $routeParams.id, (err, contact, response) => {
+                if (contact) {
+                    $scope.contact = angular.copy(contact);
+                } else {
+                    alert("Ooops! Something went wrong.");
+                }
+            })
         };
 
-        $scope.getContact();
+        $scope.deleteContact = () => {
+            if (confirm("Are you sure you want to delete the contact?")) {
+                contactService.deleteContact($rootScope.API_URL, $scope.contact._id, (err, contacts) => {
+                    if (err) {
+                        alert("Ooops! Something went wrong.");
+                    }
+
+                    $location.path('/');
+                })
+            }
+        };
+
+        getContact();
     }
 ]);
