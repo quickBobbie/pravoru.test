@@ -6,6 +6,10 @@
     npm install
     ~~~
     
++ Собрать frontend
+    ~~~
+    npm run build
+    ~~~
 + Запустить приложение
     ~~~
     npm start
